@@ -6,10 +6,14 @@ var logger = require("morgan");
 var cors = require("cors");
 //var db = require ('./model/mongo.model.user')
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var testAPIRouter = require("./routes/testAPI");
+var usersRouter = require("./routes/signin");
+var testAPIRouter = require("./routes/book");
 var mongoose = require("mongoose");
 var app = express();
+//GRidfsDep
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -22,9 +26,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/testAPI", testAPIRouter);
+app.use(indexRouter);
+app.use(usersRouter);
+app.use(testAPIRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,30 +45,21 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render("error");
 });
+    
+const mongoURI = 'mongodb+srv://myUser0:mongo1234@mycluster-rc5ys.mongodb.net/ReadersPointDB?retryWrites=true';
+mongoose.connect(mongoURI)
+// Create mongo connection
+var conn = mongoose.connection;
 
-const database='ReadersPointDB'
-const server='mycluster-rc5ys.mongodb.net'
-const user='myUser0'
-const password='mongo1234'
+// Init gfs
 
-mongoose.connect('mongodb+srv://myUser0:mongo1234@mycluster-rc5ys.mongodb.net/ReadersPointDB?retryWrites=true',function(err){
-    if(err){
-        console.log(err+' CANT CONNECT')
+Grid.mongo=mongoose.mongo;
+conn.once('open', () => {
+  // Init stream
+ var gfs = Grid(conn.db);
+  gfs.collection('uploads');
+  app.set('gfs',gfs)
+});
 
-    }
-    else{
-        console.log('Database Found')
-    }
-})
-// db.connect('mongodb+srv://myUser0:mongo1234@mycluster-rc5ys.mongodb.net/test?retryWrites=true', function(err) {
-//   if (err) {
-//     console.log('Unable to connect to Mongo.')
-//     process.exit(1)
-//   } else {
-//     app.listen(3000, function() {
-//       console.log('Listening on port 3000...')
-//     })
-//   }
-// })
 
 module.exports = app;
