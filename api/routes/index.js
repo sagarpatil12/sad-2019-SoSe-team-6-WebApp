@@ -3,7 +3,7 @@ var router = express.Router();
 var book_model = require ('../model/mongo.model.book')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/Home', function(req, res, next) {
 
     var gfs_var = req.app.get('gfs');
     console.log(gfs_var)
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
               file.isImage = false;
             }
           });
-          res.send({ files: files });
+         res.send({ file: files });
         }
       });
 });
