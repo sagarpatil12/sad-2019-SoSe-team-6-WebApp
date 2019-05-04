@@ -4,9 +4,7 @@ var book_model = require ('../model/mongo.model.book')
 
 /* GET home page. */
 router.get('/Home', function(req, res, next) {
-
-    var gfs_var = req.app.get('gfs');
-    console.log(gfs_var)
+    var gfs_var = req.app.get('gfs');    
     gfs_var.files.find().toArray((err, files) => {
         // Check if files
         if (!files || files.length === 0) {
@@ -25,6 +23,11 @@ router.get('/Home', function(req, res, next) {
          res.send({ file: files });
         }
       });
+});
+
+router.get('/Image', function(req, res, next) {
+  var gfs_var = req.app.get('gfs');
+  res.send('respond with a resource');
 });
 
 module.exports = router;

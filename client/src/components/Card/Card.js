@@ -11,8 +11,8 @@ const Card = ({id, name}) => {
         {/* </div> */}
         </Tilt>
         
-        <Text class="black times">{name}</Text>
-        <Text class="black times">{id}</Text>
+        <text class="black times">{name}</text>
+        <text class="black times">{id}</text>
         </div>
     );
 }
