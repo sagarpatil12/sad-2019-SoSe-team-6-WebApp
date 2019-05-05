@@ -20,10 +20,6 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
-// view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
-
 app.use(bodyParser.json());
 app.use(cors());
 app.use(

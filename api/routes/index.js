@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var book_model = require ('../model/mongo.model.book')
+var chunk_model = require ('../model/mongo.model.chunk')
 
 /* GET home page. */
 router.get('/Home', function(req, res, next) {
@@ -25,9 +25,16 @@ router.get('/Home', function(req, res, next) {
       });
 });
 
-router.get('/Image', function(req, res, next) {
-  var gfs_var = req.app.get('gfs');
-  res.send('respond with a resource');
-});
+router.get("/chunk", function(req, res, next) {
+  chunk_model.find(function(err,resp){
+         if(err){
+             console.log(err)
+         }
+         else{
+             res.json(resp)
+         }
+     })
+ });
+ 
 
 module.exports = router;
