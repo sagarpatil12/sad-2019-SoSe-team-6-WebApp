@@ -4,6 +4,12 @@ import Naviagtion from './components/Navigation/Navigation';
 import Search from './components/Search/Search';
 import Logo from './components/Logo/Logo';
 import CardList from './components/CardList/CardList'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Navbar from './components/Navbar'
+import Login from './components/Login'
+import Register from './components/Register'
+import Profile from './components/Profile'
 class App extends Component{
      resp = [];
       constructor(props) {
@@ -28,14 +34,25 @@ class App extends Component{
       return !books.length ?
       <h1>Loading</h1>:
        (
+        <Router>
       <div>
+
+        {/* <Naviagtion/> */}
+        <Navbar />
+        <div className="container">
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+          </div>
+        <div >
         <Logo/>
         <Search/>
-        <Naviagtion/>
-        <div >
           <CardList books={books}/>  
         </div>
+        
+
     </div>
+    </Router>
        )
         
     }
