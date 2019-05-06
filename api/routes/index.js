@@ -31,7 +31,7 @@ router.get("/chunk", function(req, res, next) {
              console.log(err)
          }
          else{
-             res.json(resp)
+             res.json({img:resp})
          }
      })
  });

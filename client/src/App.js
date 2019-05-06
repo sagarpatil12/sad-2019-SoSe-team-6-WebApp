@@ -17,7 +17,8 @@ class App extends Component{
        
         this.state = { 
          // videoURL: 'https://www.youtube.com/watch?v=XRH8pca1akY.mp4',
-          books:[]
+          books:[],
+          chunks:[]
         };
     }
    
@@ -26,7 +27,12 @@ class App extends Component{
             .then(response => response.json())
             .then(bookdata => this.setState({ books: bookdata.file}));  
             //.then(files => {alert(files)});  
-       
+
+            fetch("http://localhost:9000/chunk")
+            .then(response => response.json())
+            .then(imgdata=>{alert(imgdata.img)})
+           // .then(imgdata => this.setState({ chunks: imgdata.img}));  
+            
     }
     render(){
       const books  = this.state.books;
@@ -45,8 +51,8 @@ class App extends Component{
             <Route exact path="/profile" component={Profile} />
           </div>
         <div >
-        <Logo/>
-        <Search/>
+          <Logo/>
+          <Search/>
           <CardList books={books}/>  
         </div>
         
