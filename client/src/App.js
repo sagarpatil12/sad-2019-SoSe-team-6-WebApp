@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './App.css';
-import Naviagtion from './components/Navigation/Navigation';
+//import Naviagtion from './components/Navigation/Navigation';
 import Search from './components/Search/Search';
 import Logo from './components/Logo/Logo';
 import CardList from './components/CardList/CardList'
@@ -18,9 +18,16 @@ class App extends Component{
         this.state = { 
          // videoURL: 'https://www.youtube.com/watch?v=XRH8pca1akY.mp4',
           books:[],
-          chunks:[]
+          img: ''
         };
     }
+
+    arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));
+      bytes.forEach((b) => binary += String.fromCharCode(b));
+      return window.btoa(binary);
+  };
    
     componentWillMount() {
         fetch("http://localhost:9000/Home")
@@ -30,16 +37,19 @@ class App extends Component{
 
            fetch("http://localhost:9000/bookimg")
            .then(response => response.json())
-           //.then(imgdata=>{alert(imgdata.img.data)})
-           .then(imgdata => this.setState({ chunks: imgdata.img[2].data},
-           // console.log(imgdata.length)
-            ));  
+            .then((imgdata) => {
+              var base64Flag = 'data:image/jpeg;base64,';
+             var imageStr = this.arrayBufferToBase64(imgdata.img[1].data)
+                  this.setState({
+                      img: base64Flag + imageStr
+                  })
+             })
             
     }
     render(){
-      const books  = this.state.books;
-      const chunks = this.state.chunks;
-
+      const books  = this.state.books;      
+      const {img}= this.state;
+      
       return !books.length ?
       <h1>Loading</h1>:
        (
@@ -54,8 +64,8 @@ class App extends Component{
           </div>       
           <div >
           <Logo/>
-          <Search/>
-          <CardList books={books}/>  
+          <Search/>          
+          <CardList books={books} img={img}/>  
         </div>
     </div>
     </Router>

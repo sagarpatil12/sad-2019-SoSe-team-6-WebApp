@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card';
 
-const CardList = ({ books }) => {
+const CardList = ({ books,img }) => {
   return (
     <div class="dib">
       {
@@ -10,8 +10,9 @@ const CardList = ({ books }) => {
             <Card
               key={i}
               id={books[i]._id}
-              name={books[i].filename}              
-              />
+              name={books[i].filename}
+              imagesource={img}                       
+              />             
           );
         })
       }
