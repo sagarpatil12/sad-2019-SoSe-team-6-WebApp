@@ -26,37 +26,37 @@ class App extends Component{
         fetch("http://localhost:9000/Home")
             .then(response => response.json())
             .then(bookdata => this.setState({ books: bookdata.file}));  
-            //.then(files => {alert(files)});  
+            //.then(files => {alert(files)});   
 
-            fetch("http://localhost:9000/chunk")
-            .then(response => response.json())
-            .then(imgdata=>{alert(imgdata.img)})
-           // .then(imgdata => this.setState({ chunks: imgdata.img}));  
+           fetch("http://localhost:9000/bookimg")
+           .then(response => response.json())
+           //.then(imgdata=>{alert(imgdata.img.data)})
+           .then(imgdata => this.setState({ chunks: imgdata.img[2].data},
+           // console.log(imgdata.length)
+            ));  
             
     }
     render(){
       const books  = this.state.books;
+      const chunks = this.state.chunks;
 
       return !books.length ?
       <h1>Loading</h1>:
        (
-        <Router>
+      <Router>
       <div>
-
         {/* <Naviagtion/> */}
         <Navbar />
         <div className="container">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
-          </div>
-        <div >
+          </div>       
+          <div >
           <Logo/>
           <Search/>
           <CardList books={books}/>  
         </div>
-        
-
     </div>
     </Router>
        )

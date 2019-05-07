@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var chunk_model = require ('../model/mongo.model.chunk')
+var chunk_model = require ('../model/mongo.model.chunk');
+//import t from ('typy');
 
 /* GET home page. */
 router.get('/Home', function(req, res, next) {
@@ -25,16 +26,20 @@ router.get('/Home', function(req, res, next) {
       });
 });
 
-router.get("/chunk", function(req, res, next) {
-  chunk_model.find(function(err,resp){
+ router.get("/bookimg", function(req, res, next) {
+   chunk_model.find(function(err,resp){
          if(err){
-             console.log(err)
+             console.log(err)             
          }
-         else{
-             res.json({img:resp})
+         else{        
+          var  img=[];
+          for(i=0;i<resp.length;i++)
+          {
+            img.push(resp[i].data);
+          }
+          res.json({img})
          }
      })
  });
  
-
 module.exports = router;

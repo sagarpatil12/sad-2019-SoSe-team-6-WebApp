@@ -5,14 +5,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-
+const JSON = require('circular-json');
 
 //var db = require ('./model/mongo.model.user')
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/signin");
 var testAPIRouter = require("./routes/book");
 var Users = require('./routes/Users')
-
 var mongoose = require("mongoose");
 var app = express();
 //GRidfsDep
@@ -34,9 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(indexRouter);
-app.use(usersRouter);
 app.use(testAPIRouter);
-
 app.use(Users);
 
 // catch 404 and forward to error handler
@@ -56,12 +52,12 @@ app.use(function(err, req, res, next) {
 });
     
 const mongoURI = 'mongodb+srv://myUser0:mongo1234@mycluster-rc5ys.mongodb.net/ReadersPointDB?retryWrites=true';
+//const mongoURI ='mongodb://localhost:27017/ReadersPointDB'
 mongoose
     .connect(mongoURI, { useNewUrlParser: true })
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log(err))
 
-// mongoose.connect(mongoURI)
 // Create mongo connection
 var conn = mongoose.connection;
 
@@ -75,6 +71,6 @@ conn.once('open', () => {
   app.set('gfs',gfs)
 });
 
-
+app.set('JSON',JSON)
 
 module.exports = app;
