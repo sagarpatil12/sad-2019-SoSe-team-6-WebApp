@@ -17,8 +17,9 @@ class App extends Component{
        
         this.state = { 
          // videoURL: 'https://www.youtube.com/watch?v=XRH8pca1akY.mp4',
+         responseCount:[],
           books:[],
-          img: ''
+          img:''
         };
     }
 
@@ -39,17 +40,26 @@ class App extends Component{
            .then(response => response.json())
             .then((imgdata) => {
               var base64Flag = 'data:image/jpeg;base64,';
-             var imageStr = this.arrayBufferToBase64(imgdata.img[1].data)
-                  this.setState({
-                      img: base64Flag + imageStr
-                  })
+
+              var imgstring=[]
+              for(var i=0;i<imgdata.img.length;i++)
+              {
+             var imageStr = this.arrayBufferToBase64(imgdata.img[i].data)
+                  imgstring.push(base64Flag + imageStr)
+            
+                }
+                this.setState({
+                  img: imgstring
+              })
              })
             
     }
     render(){
-      const books  = this.state.books;      
+      const books  = this.state.books;  
+          
       const {img}= this.state;
-      
+      console.log(img.length)
+      //console.log(img.)
       return !books.length ?
       <h1>Loading</h1>:
        (
