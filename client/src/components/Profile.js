@@ -2,23 +2,11 @@ import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode'
 
 class Profile extends Component {
-    constructor() {
-        super()
-        this.state = {
-            first_name: '',
-            last_name: '',
-            email: ''
-        }
-    }
 
     componentDidMount () {
         const token = localStorage.usertoken
         const decoded = jwt_decode(token)
-        this.setState({
-            first_name: decoded.first_name,
-            last_name: decoded.last_name,
-            email: decoded.email,
-        })
+
     }
 
     render () {
@@ -26,25 +14,22 @@ class Profile extends Component {
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">PROFILE</h1>
-                    </div>
-                    <table className="table col-md-6 mx-auto">
-                        <tbody>
-                            <tr>
-                                <td>First Name</td>
-                                <td>{this.state.first_name}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td>{this.state.last_name}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>{this.state.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <h1 className="text-center">Your Book</h1>
+                     </div>
+                         <div>
+                                <iframe src="http://localhost:9000/book/To%20Kill%20a%20Mockingbird%20-%20Lee%2C%20Nelle%20Harper?page=hsn#toolbar=0"
+                                    width="1000"
+                                    height="1333"
+                                    id="myId"
+                                    allowFullScreen
+                                 />
+                         <div>
+
+                                <button type="button" class="btn btn-success">Download</button>
+                        </div>      
+                     </div>
+  
+                 </div>
             </div>
         )
     }

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import Tilt from 'react-tilt';
+ import book from './logo.png';
+
+
 
 class Navbar extends Component {
     logOut (e) {
@@ -8,7 +12,10 @@ class Navbar extends Component {
         this.props.history.push(`/`)
     }
 
+
     render () {
+
+
         const loginRegLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
@@ -27,8 +34,8 @@ class Navbar extends Component {
         const userLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link to="/profile" className="nav-link">
-                        User
+                    <Link to="/Profile" className="nav-link">
+                        Book
                     </Link>
                 </li>
                 <li className="nav-item">
@@ -40,7 +47,15 @@ class Navbar extends Component {
         )
 
         return (
+
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+            <div className='ma3 mt2 dib fl'>
+                 <Tilt className="Tilt br2 shadow-2 dib" options={{ max : 25 }} style={{ height: 100, width: 100 }} >
+            <div className="Tilt-inner pa1 ml1"><img src={book} alt="logo" style={{ height: 100, width: 100 }}/></div>
+                </Tilt>
+            <h2 class="black times ma3 ml4 pa3 fs-20 dib">ReadersPoint</h2>
+            </div>
+
                 <button className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -66,4 +81,4 @@ class Navbar extends Component {
     }
 }
 
-export default withRouter(Navbar)
+export default withRouter(Navbar);

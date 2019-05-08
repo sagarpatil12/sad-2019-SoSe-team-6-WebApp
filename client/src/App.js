@@ -113,10 +113,10 @@ class App extends Component{
               <Route exact path="/profile" component={Profile} />
           </div>       
           <div >
-          <Logo/>
+          {/* <Logo/> */}
           <Search searchChange={this.onSearchChange}/>          
           <CardList books={filteredBooks} img={this.state.img}/>  
-          <Pdf />
+          {/* <Pdf /> */}
         </div>
     </div>
     </Router>
