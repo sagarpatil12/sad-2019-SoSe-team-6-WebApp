@@ -5,12 +5,14 @@ import Search from './components/Search/Search';
 import Logo from './components/Logo/Logo';
 import CardList from './components/CardList/CardList'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import sample from './libraryvideo.mp4'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
 
+import Pdf from './components/Pdf/pdf'
+//import Iframe from 'react-iframe'
 
 class App extends Component{
      resp = [];
@@ -23,7 +25,8 @@ class App extends Component{
          responseCount:[],
           books:[],
           img:'',
-          searchfield:''
+          searchfield:'',
+          route:'home'
         };
 
     }
@@ -64,6 +67,15 @@ class App extends Component{
       this.setState({ searchfield: event.target.value})
 
     }
+
+    onRouteChange = (route) => {
+      // if (route === 'signout') {
+      //   this.setState({isSignedIn: false})
+      // } else if (route === 'home') {
+      //   this.setState({isSignedIn: true})
+      // }
+      this.setState({route: route});
+    }
     
     render(){
       const filteredBooks = this.state.books.filter(book =>{
@@ -89,18 +101,22 @@ class App extends Component{
       <h1>Loading</h1>:
        (
       <Router>
-      <div>
+      <div >
+      {/* <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
+        <source src={sample} type='video/mp4' />
+        </video> */}      
         {/* <Naviagtion/> */}
         <Navbar />
-        <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
+          <div className="container">
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
           </div>       
           <div >
           <Logo/>
           <Search searchChange={this.onSearchChange}/>          
           <CardList books={filteredBooks} img={this.state.img}/>  
+          <Pdf />
         </div>
     </div>
     </Router>

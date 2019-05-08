@@ -67,7 +67,7 @@ Grid.mongo=mongoose.mongo;
 conn.once('open', () => {
   // Init stream
  var gfs = Grid(conn.db);
-  gfs.collection('uploads');
+ // gfs.collection('uploads');
   app.set('gfs',gfs)
 });
 
