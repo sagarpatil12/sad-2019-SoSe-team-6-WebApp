@@ -28,7 +28,7 @@ router.get("/book/:filename", function(req, res, next) {
              /** create read stream */
             var readstream = gfs_var.createReadStream({
                 filename: files[0].filename,
-                root: "uploads"
+                root: "filedata"
             });
 
          return readstream.pipe(res);

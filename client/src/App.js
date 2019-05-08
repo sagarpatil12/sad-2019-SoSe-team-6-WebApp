@@ -10,6 +10,8 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
+//import Iframe from 'react-iframe'
+
 class App extends Component{
      resp = [];
       constructor(props) {
@@ -55,8 +57,7 @@ class App extends Component{
             
     }
     render(){
-      const books  = this.state.books;  
-          
+      const books  = this.state.books;            
       const {img}= this.state;
       console.log(img.length)
       //console.log(img.)
@@ -76,6 +77,12 @@ class App extends Component{
           <Logo/>
           <Search/>          
           <CardList books={books} img={img}/>  
+          <iframe src="http://localhost:9000/book/To%20Kill%20a%20Mockingbird%20-%20Lee%2C%20Nelle%20Harper"
+        width="1000"
+        height="3000"
+        id="myId"
+        allowFullScreen
+       />
         </div>
     </div>
     </Router>
