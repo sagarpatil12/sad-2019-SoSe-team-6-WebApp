@@ -26,7 +26,8 @@ class App extends Component{
           books:[],
           img:'',
           searchfield:'',
-          route:'home'
+          route:'home',
+          
         };
 
     }

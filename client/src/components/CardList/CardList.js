@@ -11,7 +11,8 @@ const CardList = ({ books,img }) => {
               key={i}
               id={books[i]._id}
               name={books[i].filename}
-              imagesource={img[i]}                       
+              imagesource={img[i]} 
+              price={books[i].price}                      
               />             
           );
         })
