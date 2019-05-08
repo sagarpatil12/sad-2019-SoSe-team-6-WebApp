@@ -8,4 +8,4 @@ const bookSchema = new mongoose.Schema({
   cover_url:String
 })
 
-module.exports=mongoose.model('book',bookSchema)
+module.exports=mongoose.model('filedata',bookSchema)

@@ -8,4 +8,4 @@ const chunkSchema = new mongoose.Schema({
   data:Buffer
 })
 
-module.exports=mongoose.model('uploads.chunk',chunkSchema)
+module.exports=mongoose.model('imagedata.chunk',chunkSchema)

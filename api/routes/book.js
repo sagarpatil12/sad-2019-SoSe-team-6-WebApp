@@ -14,8 +14,9 @@ var book_model = require ('../model/mongo.model.book')
 //     })
 // });
 router.get("/book/:filename", function(req, res, next) {
-    var gfs_var = req.app.get('gfs');    
     
+    var gfs_var = req.app.get('gfs');    
+    gfs_var.collection('filedata');
           /** First check if file exists */
           gfs_var.files.find({filename: req.params.filename}).toArray(function(err, files){
             if(!files || files.length === 0){

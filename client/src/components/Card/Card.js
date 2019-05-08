@@ -8,7 +8,7 @@ const Card = ({id, name,imagesource}) => {
             <img alt='books' src={imagesource} classname="Tilt-inner pa3" class ="center"style={{ height: 300, width: 225 }}  />      
             </Tilt>        
             <text class="black times">{name}</text>        
-            <text class="black times">{id}</text>
+            {/* <text class="black times">{id}</text> */}
         </div>
     );
 }
