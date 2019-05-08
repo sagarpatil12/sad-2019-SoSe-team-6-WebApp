@@ -3,6 +3,11 @@
   height: 100%;
   
 }
+.videoTag{
+  top:0; 
+  left:0;bottom:0;right:0;
+  
+}
 /*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

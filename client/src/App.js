@@ -5,11 +5,12 @@ import Search from './components/Search/Search';
 import Logo from './components/Logo/Logo';
 import CardList from './components/CardList/CardList'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import sample from './libraryvideo.mp4'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
+import Pdf from './components/Pdf/pdf'
 //import Iframe from 'react-iframe'
 
 class App extends Component{
@@ -21,7 +22,8 @@ class App extends Component{
          // videoURL: 'https://www.youtube.com/watch?v=XRH8pca1akY.mp4',
          responseCount:[],
           books:[],
-          img:''
+          img:'',
+          route:'home'
         };
     }
 
@@ -56,6 +58,15 @@ class App extends Component{
              })
             
     }
+
+    onRouteChange = (route) => {
+      // if (route === 'signout') {
+      //   this.setState({isSignedIn: false})
+      // } else if (route === 'home') {
+      //   this.setState({isSignedIn: true})
+      // }
+      this.setState({route: route});
+    }
     render(){
       const books  = this.state.books;            
       const {img}= this.state;
@@ -65,25 +76,23 @@ class App extends Component{
       <h1>Loading</h1>:
        (
       <Router>
-      <div>
+      <div >
+      {/* <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
+        <source src={sample} type='video/mp4' />
+        </video> */}      
         {/* <Naviagtion/> */}
         <Navbar />
-        <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
+          <div className="container">
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
           </div>       
           <div >
           <Logo/>
           <Search/>          
           <CardList books={books} img={img}/>  
-          <iframe src="http://localhost:9000/book/To%20Kill%20a%20Mockingbird%20-%20Lee%2C%20Nelle%20Harper"
-        width="1000"
-        height="3000"
-        id="myId"
-        allowFullScreen
-       />
-        </div>
+          <Pdf/>
+          </div>         
     </div>
     </Router>
        )
