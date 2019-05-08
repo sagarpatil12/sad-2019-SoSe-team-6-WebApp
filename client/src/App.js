@@ -10,8 +10,11 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
+
+
 class App extends Component{
      resp = [];
+
       constructor(props) {
         super(props);
        
@@ -19,8 +22,10 @@ class App extends Component{
          // videoURL: 'https://www.youtube.com/watch?v=XRH8pca1akY.mp4',
          responseCount:[],
           books:[],
-          img:''
+          img:'',
+          searchfield:''
         };
+
     }
 
     arrayBufferToBase64(buffer) {
@@ -54,11 +59,31 @@ class App extends Component{
              })
             
     }
+    onSearchChange = (event) => {
+      // console.log(event.target.value);
+      this.setState({ searchfield: event.target.value})
+
+    }
+    
     render(){
+      const filteredBooks = this.state.books.filter(book =>{
+        return book.filename.toLowerCase().includes(this.state.searchfield.toLowerCase());   
+      })
+      
       const books  = this.state.books;  
+
           
       const {img}= this.state;
-      console.log(img.length)
+      // console.log(img.length)
+    //   const image = function (filteredBooks, books, filename) {
+    //     for(var i = 0; i < books.length; i++) {
+    //         if(books[i][filename] === filteredBooks) {
+    //             return i;
+    //         }
+    //     }
+    //     return -1; //to handle the case where the value doesn't exist
+    // } 
+    //   console.log("couhjuuhzuhuhih"+image);
       //console.log(img.)
       return !books.length ?
       <h1>Loading</h1>:
@@ -74,8 +99,8 @@ class App extends Component{
           </div>       
           <div >
           <Logo/>
-          <Search/>          
-          <CardList books={books} img={img}/>  
+          <Search searchChange={this.onSearchChange}/>          
+          <CardList books={filteredBooks} img={this.state.img}/>  
         </div>
     </div>
     </Router>
