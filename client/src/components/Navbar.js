@@ -53,7 +53,7 @@ class Navbar extends Component {
                  <Tilt className="Tilt br2 shadow-2 dib" options={{ max : 25 }} style={{ height: 100, width: 100 }} >
             <div className="Tilt-inner pa1 ml1"><img src={book} alt="logo" style={{ height: 100, width: 100 }}/></div>
                 </Tilt>
-            <h2 class="black times ma3 ml4 pa3 fs-20 dib">ReadersPoint</h2>
+            <h2 class="light-gray times ma3 ml4 pa3 fs-20 dib">ReadersPoint</h2>
             </div>
 
                 <button className="navbar-toggler"
