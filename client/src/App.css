@@ -8,6 +8,10 @@
   left:0;bottom:0;right:0;
   
 }
+.container{
+  flex:1; align-Items: center;
+  justify-Content:"center",
+}
 /*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

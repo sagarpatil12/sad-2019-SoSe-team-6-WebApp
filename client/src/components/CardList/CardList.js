@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
 
-const CardList = ({ books,img }) => {
+const CardList = ({ books,img,onImageClick }) => {
   return (
-    <div class="dib">
+    <div class="dib al">
       {
         books.map((file, i) => {
           return (

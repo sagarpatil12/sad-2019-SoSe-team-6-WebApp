@@ -18,18 +18,17 @@ class BookPdf extends Component {
  
   render() {
     // const { pageNumber, numPages } = this.state;
- 
+    const { onImageClick } = this.props;
     return (
       <div>
         <iframe src="http://localhost:9000/book/To%20Kill%20a%20Mockingbird%20-%20Lee%2C%20Nelle%20Harper?page=hsn#toolbar=0"
         width="1000"
         height="1333"
         id="myId"
-        allowFullScreen
-       />
-       <div>
+        allowFullScreen/>
+      <div>
 
-       <button type="button" class="btn btn-success">Download</button>
+      <button type="button" class="btn btn-success">Download</button>
         </div>      
       </div>
       

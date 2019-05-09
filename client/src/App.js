@@ -26,7 +26,8 @@ class App extends Component{
           books:[],
           img:'',
           searchfield:'',
-          route:'home'
+          route:'home',
+          bookname:''
         };
 
     }
@@ -65,7 +66,7 @@ class App extends Component{
     onSearchChange = (event) => {
       // console.log(event.target.value);
       this.setState({ searchfield: event.target.value})
-
+      this.setState({imgaeList: event.target.value})
     }
 
     onRouteChange = (route) => {
@@ -77,48 +78,43 @@ class App extends Component{
       this.setState({route: route});
     }
     
+
+    onImageClick=(data)=>{
+this.setState({bname:data})
+    }
+
     render(){
       const filteredBooks = this.state.books.filter(book =>{
         return book.filename.toLowerCase().includes(this.state.searchfield.toLowerCase());   
       })
-      
-      const books  = this.state.books;  
 
-          
-      const {img}= this.state;
-      // console.log(img.length)
-    //   const image = function (filteredBooks, books, filename) {
-    //     for(var i = 0; i < books.length; i++) {
-    //         if(books[i][filename] === filteredBooks) {
-    //             return i;
-    //         }
-    //     }
-    //     return -1; //to handle the case where the value doesn't exist
-    // } 
-    //   console.log("couhjuuhzuhuhih"+image);
-      //console.log(img.)
+       const {books,bname}  = this.state; 
+       const {img}= this.state;
+  
+      console.log("ppppppppppppppppp");
+      console.log(img)
       return !books.length ?
       <h1>Loading</h1>:
        (
       <Router>
-      <div >
-      {/* <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
+      <view >
+      <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
         <source src={sample} type='video/mp4' />
-        </video> */}      
+        </video>      
         {/* <Naviagtion/> */}
         <Navbar />
-          <div className="container">
+          <view className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profile" component={Profile} />
-          </div>       
+          </view>       
           <div >
           <Logo/>
           <Search searchChange={this.onSearchChange}/>          
-          <CardList books={filteredBooks} img={this.state.img}/>  
-          <Pdf />
+          <CardList books={filteredBooks} img={this.state.img} onImageClick={this.onImageClick}/>  
+          <Pdf onImageClick={this.onImageClick} />
         </div>
-    </div>
+    </view>
     </Router>
        )
         
