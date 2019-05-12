@@ -11,7 +11,9 @@ const CardList = ({ books,img,onImageClick }) => {
               key={i}
               id={books[i]._id}
               name={books[i].filename}
-              imagesource={img[i]}                       
+              imagesource={img[i]} 
+              price={books[i].price}
+              onImageClick={onImageClick}                      
               />             
           );
         })

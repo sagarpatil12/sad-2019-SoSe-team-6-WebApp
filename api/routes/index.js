@@ -18,6 +18,7 @@ router.get('/Home', function(req, res, next) {
       });
 });
 
+//get images from image chunk
  router.get("/bookimg", function(req, res, next) {
    chunk_model.find(function(err,resp){
          if(err){

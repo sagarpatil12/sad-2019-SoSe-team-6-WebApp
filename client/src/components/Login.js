@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { login } from './UserFunctions'
 
 class Login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: '',
             password: '',
+
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+       
     }
 
     onChange (e) {
@@ -25,19 +27,21 @@ class Login extends Component {
         }
 
         login(user).then(res => {
-            if (res) {
-                this.props.history.push(`/`)
-            }
+            if (res) {               
+                this.props.onRouteChange('home');
+            }            
         })
     }
 
-    render () {
+    render () {    
+        const { onRouteChange } = this.props; 
         return (
-            <div className="container">
+            
+            <div className="container white ba bw2 w-50 mt6 center br4">
                 <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
+                    <div className="col-md-6 mt-3 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
-                            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                            <h1 className="h3 mb-3 font-weight-normal">Sign In Here!</h1>
                             <div className="form-group">
                                 <label htmlFor="email">Email Address</label>
                                 <input type="email"
@@ -56,7 +60,7 @@ class Login extends Component {
                                     value={this.state.password}
                                     onChange={this.onChange} />
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                            <button type="submit" className="btn btn-lg btn-primary center-block mb4"  >
                                 Sign in
                             </button>
                         </form>

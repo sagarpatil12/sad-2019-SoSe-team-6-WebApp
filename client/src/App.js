@@ -10,8 +10,7 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
-
-import Pdf from './components/Pdf/pdf'
+import PDF from './components/Pdf/pdf'
 //import Iframe from 'react-iframe'
 
 class App extends Component{
@@ -27,8 +26,8 @@ class App extends Component{
           img:'',
           searchfield:'',
           route:'home',
-          bookname:''
-        };
+          bname:''
+        }
 
     }
 
@@ -80,7 +79,9 @@ class App extends Component{
     
 
     onImageClick=(data)=>{
-this.setState({bname:data})
+    this.setState({route:'pdf'})
+    //this.setState({bname:data})
+    this.setState({data: encodeURIComponent(data)});
     }
 
     render(){
@@ -88,33 +89,58 @@ this.setState({bname:data})
         return book.filename.toLowerCase().includes(this.state.searchfield.toLowerCase());   
       })
 
-       const {books,bname}  = this.state; 
-       const {img}= this.state;
-  
-      console.log("ppppppppppppppppp");
-      console.log(img)
+       const {books,data,img,route}  = this.state;        
+      console.log(data)
       return !books.length ?
       <h1>Loading</h1>:
        (
       <Router>
-      <view >
-      <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
-        <source src={sample} type='video/mp4' />
-        </video>      
+      <div>
+     
         {/* <Naviagtion/> */}
-        <Navbar />
-          <view className="container">
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/profile" component={Profile} />
-          </view>       
-          <div >
-          <Logo/>
-          <Search searchChange={this.onSearchChange}/>          
-          <CardList books={filteredBooks} img={this.state.img} onImageClick={this.onImageClick}/>  
-          <Pdf onImageClick={this.onImageClick} />
+        <div>
+        <Navbar onRouteChange={this.onRouteChange}/>
         </div>
-    </view>
+          <div className="container">
+              {route==='register'
+               ? <Register onRouteChange={this.onRouteChange} />
+       
+               : (route==='login' ?
+                <Login  onRouteChange={this.onRouteChange}/>
+
+                : (route==='profile'?
+                <Profile  onRouteChange={this.onRouteChange}/>
+
+                :(route==='home')
+                )
+               )
+              }
+              
+          </div>       
+          <div >  
+              <video className='videoTag' autoPlay loop muted resizeMode={"cover"}>
+        <source src={sample} type='video/mp4' />
+        </video>     
+        {route==='home'
+
+         ? 
+         <div><Search searchChange={this.onSearchChange}/>  
+          <CardList books={filteredBooks} img={this.state.img} onImageClick={this.onImageClick}/>  
+          </div>
+          
+          : 
+          (route==='pdf'
+          ?          
+          <div class="dib">
+            <PDF data={this.state.data}/>  
+            </div>
+            :<div>No PDF available</div>        
+          )      
+
+        }
+        </div>
+         
+    </div>
     </Router>
        )
         
