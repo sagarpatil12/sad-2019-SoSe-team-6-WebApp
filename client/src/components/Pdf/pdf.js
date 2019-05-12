@@ -21,7 +21,7 @@ class BookPdf extends Component {
     const { data } = this.props;
     
     return (
-      <div class="pa4 dib">     
+      <div class="pa5 ml7 dib ">     
         <iframe src={`http://localhost:9000/book/${data}`}
         width="1000"
         height="1333"

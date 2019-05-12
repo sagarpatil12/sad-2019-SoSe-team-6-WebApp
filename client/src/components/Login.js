@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { login } from './UserFunctions'
 
 class Login extends Component {
     constructor(props) {
@@ -28,6 +29,8 @@ class Login extends Component {
         })
         .then(res => {
           if (res.status === 200) {
+
+            localStorage.setItem('usertoken', res.data)            
             this.props.onRouteChange('home');
           } else {
             const error = new Error(res.error);
