@@ -1,19 +1,8 @@
 var express = require("express");
 var router = express.Router();
-// var book_model = require ('../model/mongo.model.book')
+const withAuth = require('./middleware');
 
-//API to get details of book
-// router.get("/book", function(req, res, next) {
-//  book_model.find(function(err,resp){
-//         if(err){
-//             console.log(err)
-//         }
-//         else{
-//             res.json(resp)
-//         }
-//     })
-// });
-router.get("/book/:filename", function(req, res, next) {
+router.get("/book/:filename",withAuth, function(req, res, next) {
     
     var gfs_var = req.app.get('gfs');    
     gfs_var.collection('filedata');

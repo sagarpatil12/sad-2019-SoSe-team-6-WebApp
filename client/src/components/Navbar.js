@@ -6,10 +6,13 @@ import Tilt from 'react-tilt';
 
 
 class Navbar extends Component {
+    constructor(props) {
+        super(props)
+        }
     logOut (e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
-        this.props.history.push(`/`)
+        this.props.onRouteChange('home')
     }
 
 
@@ -33,8 +36,8 @@ class Navbar extends Component {
         const userLink = (
             <ul className="navbar-nav">
                 <li className="nav-item f3">
-                    <Link to="/Profile" className="nav-link">
-                        Book
+                    <Link to="/Profile" className="nav-link" onClick={() => onRouteChange('profile')} >
+                        Profile
                     </Link>
                 </li>
                 <li className="nav-item f3">

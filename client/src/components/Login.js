@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { login } from './UserFunctions'
 
 class Login extends Component {
     constructor(props) {
@@ -18,23 +17,31 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit (e) {
-        e.preventDefault()
-
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        login(user).then(res => {
-            if (res) {               
-                this.props.onRouteChange('home');
-            }            
+    onSubmit (event) {
+        event.preventDefault();
+        fetch('/login', {
+          method: 'POST',
+          body: JSON.stringify(this.state),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         })
+        .then(res => {
+          if (res.status === 200) {
+            this.props.onRouteChange('home');
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Error logging in please try again');
+        });
     }
 
     render () {    
-        const { onRouteChange } = this.props; 
+       // const { onRouteChange } = this.props; 
         return (
             
             <div className="container white ba bw2 w-50 mt6 center br4">
