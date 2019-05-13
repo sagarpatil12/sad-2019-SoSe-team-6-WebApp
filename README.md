@@ -1,4 +1,4 @@
-# sad-2019-SoSe-team-6-WebApp
+# sad-2019-SoSe-team-6-WebApp(ReadersPoint)
 
 Sagar Patil 11010891
 Rajkiran Gurunathan 11011876
